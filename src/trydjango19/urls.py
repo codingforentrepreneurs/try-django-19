@@ -19,4 +19,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^posts/$', "posts.views.post_home"),
+    #url(r'^posts/$', "<appname>.views.<function_name>"),
 ]
