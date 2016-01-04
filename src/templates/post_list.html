@@ -1,10 +1,7 @@
-<!--DOCTYPE html -->
-<html>
+{% extends "base.html" %}
+{% block content %}
 
-
-<body>
 <h1>{{ title }} is working!</h1>
-
 {% for obj in object_list %}
 /posts/id/
 {% url "posts:detail" id=obj.id %}
@@ -17,6 +14,6 @@
 {% endfor %}
 
 
-</body>
 
-</html>
+
+{% endblock content %}
