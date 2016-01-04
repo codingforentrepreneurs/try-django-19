@@ -6,8 +6,9 @@
 <h1>{{ title }} is working!</h1>
 
 {% for obj in object_list %}
-
-{{ obj.title }}<br/>
+/posts/id/
+{% url "posts:detail" id=obj.id %}
+<a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a><br/>
 {{ obj.content }}<br/>
 {{ obj.timestamp }}<br/>
 {{ obj.updated }}<br/>
