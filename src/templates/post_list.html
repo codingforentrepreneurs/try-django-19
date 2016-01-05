@@ -14,6 +14,7 @@
         {% endif %}
       <div class="caption">
         <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.timestamp|timesince }} ago</small></h3>
+        {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
         <p>{{ obj.content|linebreaks|truncatechars:120 }}</p>
         <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
       </div>
