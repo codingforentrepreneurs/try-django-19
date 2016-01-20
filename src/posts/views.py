@@ -1,4 +1,12 @@
-from urllib import quote_plus
+try:
+    from urllib import quote_plus #python 2
+except:
+    pass
+
+try:
+    from urllib.parse import quote_plus #python 3
+except: 
+    pass
 
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
