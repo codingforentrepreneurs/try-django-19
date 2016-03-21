@@ -54,7 +54,7 @@ The tutorial code below is the final code from the end of each tutorial video. E
 
 [23 - Delete View](../../tree/754e4d86fb3682be3cd77fd99592cdb16b186f8e)
 
-[24 - Templates & Inheritance](a581cf1ea920794b04117c15ed4d695abebcd555)
+[24 - Templates & Inheritance](../../tree/a581cf1ea920794b04117c15ed4d695abebcd555)
 
 [25 - Setup Static Files - CSS - Javascript - Images in Django](../../tree/adcc96bb9e014a948ed86d1ae43243deb6565b08)
 
