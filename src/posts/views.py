@@ -40,7 +40,8 @@ def post_detail(request, slug=None):
 	if instance.publish > timezone.now().date() or instance.draft:
 		if not request.user.is_staff or not request.user.is_superuser:
 			raise Http404
-	share_string = quote_plus(instance.content)
+	string = instance.content
+	share_string = quote_plus(string.encode('utf-8'), safe=":/")
 	context = {
 		"title": instance.title,
 		"instance": instance,
