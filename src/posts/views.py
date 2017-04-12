@@ -19,7 +19,7 @@ from .forms import PostForm
 from .models import Post
 
 def post_create(request):
-	if not request.user.is_staff or not request.user.is_superuser:
+	if not request.user.is_staff and not request.user.is_superuser:
 		raise Http404
 		
 	form = PostForm(request.POST or None, request.FILES or None)
@@ -38,7 +38,7 @@ def post_create(request):
 def post_detail(request, slug=None):
 	instance = get_object_or_404(Post, slug=slug)
 	if instance.publish > timezone.now().date() or instance.draft:
-		if not request.user.is_staff or not request.user.is_superuser:
+		if not request.user.is_staff and not request.user.is_superuser:
 			raise Http404
 	share_string = quote_plus(instance.content)
 	context = {
@@ -88,7 +88,7 @@ def post_list(request):
 
 
 def post_update(request, slug=None):
-	if not request.user.is_staff or not request.user.is_superuser:
+	if not request.user.is_staff and not request.user.is_superuser:
 		raise Http404
 	instance = get_object_or_404(Post, slug=slug)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
@@ -108,7 +108,7 @@ def post_update(request, slug=None):
 
 
 def post_delete(request, slug=None):
-	if not request.user.is_staff or not request.user.is_superuser:
+	if not request.user.is_staff and not request.user.is_superuser:
 		raise Http404
 	instance = get_object_or_404(Post, slug=slug)
 	instance.delete()
