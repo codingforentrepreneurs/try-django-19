@@ -42,6 +42,8 @@ Created for Django Code Review
 from django.views.generic import DetailView
 
 class PostDetailView(DetailView):
+	template_name = 'post_detail.html' 
+	
 	def get_object(self, *args, **kwargs):
 		slug = self.kwargs.get("slug")
 		instance = get_object_or_404(Post, slug=slug)
@@ -53,8 +55,6 @@ class PostDetailView(DetailView):
 	def get_context_data(self, *args, **kwargs):
 		context = super(PostDetailView, self).get_context_data(*args, **kwargs)
 		instance = context['object']
-		context['instance'] = instance
-		context['title']= instance.title
 		context['share_string'] = quote_plus(instance.content)
 		return context
 	
