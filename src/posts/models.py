@@ -11,13 +11,23 @@ from django.utils.text import slugify
 # MVC MODEL VIEW CONTROLLER
 
 
-#Post.objects.all()
+#Post.objects.all().published()
 #Post.objects.create(user=user, title="Some time")
 
+class PostQuerySet(models.query.QuerySet):
+    def not_draft(self):
+        return self.filter(draft=False)
+    
+    def published(self):
+        return self.filter(publish__lte=timezone.now()).not_draft()
+
 class PostManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return PostQuerySet(self.model, using=self._db)
+            
     def active(self, *args, **kwargs):
         # Post.objects.all() = super(PostManager, self).all()
-        return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
+        return self.get_queryset().published()
 
 
 def upload_location(instance, filename):
