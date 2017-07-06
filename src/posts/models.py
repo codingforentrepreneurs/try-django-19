@@ -74,6 +74,10 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
+       
+#    @property
+#    def title(self):
+#        return "Title"
 
 
 
@@ -89,9 +93,15 @@ def create_slug(instance, new_slug=None):
     return slug
 
 
+'''
+unique_slug_generator from Django Code Review #2 on joincfe.com/youtube/
+'''
+from .utils import unique_slug_generator
+
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
-        instance.slug = create_slug(instance)
+        # instance.slug = create_slug(instance)
+        instance.slug = unique_slug_generator(instance)
 
 
 
