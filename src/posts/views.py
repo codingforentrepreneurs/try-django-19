@@ -35,6 +35,32 @@ def post_create(request):
 	}
 	return render(request, "post_form.html", context)
 
+'''
+Created for Django Code Review
+'''
+
+from django.views.generic import DetailView
+
+class PostDetailView(DetailView):
+	def get_object(self, *args, **kwargs):
+		slug = self.kwargs.get("slug")
+		instance = get_object_or_404(Post, slug=slug)
+		if instance.publish > timezone.now().date() or instance.draft:
+			if not request.user.is_staff or not request.user.is_superuser:
+				raise Http404
+		return instance
+	
+	def get_context_data(self, *args, **kwargs):
+		context = super(PostDetailView, self).get_context_data(*args, **kwargs)
+		instance = context['object']
+		context['instance'] = instance
+		context['title']= instance.title
+		context['share_string'] = quote_plus(instance.content)
+		return context
+	
+# in urls.py --> PostDetailView.as_view() instead of post_detail
+
+
 def post_detail(request, slug=None):
 	instance = get_object_or_404(Post, slug=slug)
 	if instance.publish > timezone.now().date() or instance.draft:
