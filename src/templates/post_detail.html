@@ -2,19 +2,19 @@
 {% load urlify %}
 
 {% block head_title %}
-{{ instance.title }} | {{ block.super }}
+{{ object.title }} | {{ block.super }}
 {% endblock head_title %}
 
 
 
 {% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
-    {% if instance.image %}
-    <img src='{{ instance.image.url }}' class='img-responsive' />
+    {% if object.image %}
+    <img src='{{ object.image.url }}' class='img-responsive' />
     {% endif %}
-<h1>{{ title }} <small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small></h1>
-{% if instance.user.get_full_name %}
-<p>Author: {{ instance.user.get_full_name }}</p>
+<h1>{{ object.title }} <small>{% if object.draft %}<span style='color:red;'>Draft</span> {% endif %}{{ object.publish }}</small></h1>
+{% if object.user.get_full_name %}
+<p>Author: {{ object.user.get_full_name }}</p>
 {% endif %}
 
 <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
@@ -26,14 +26,14 @@
 Facebook
 </a>
 
-<a href="https://twitter.com/home?status={{ instance.content|truncatechars:80|urlify }}%20{{ request.build_absolute_uri }}">
+<a href="https://twitter.com/home?status={{ object.content|truncatechars:80|urlify }}%20{{ request.build_absolute_uri }}">
 Twitter
 </a>
 
 <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
 
 
-<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
+<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ object.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
 Linkedin
 </a>
 
@@ -43,7 +43,7 @@ Linkedin
 <div class='row'>
 <div class='col-sm-12'>
 
-{{ instance.content|linebreaks }}
+{{ object.content|linebreaks }}
 
 <hr/>
 <br/>
