@@ -20,7 +20,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
+    # this will go to admin page
     url(r'^admin/', admin.site.urls),
+    # this will go to posts page
     url(r'^posts/', include("posts.urls", namespace='posts')),
     #url(r'^posts/$', "<appname>.views.<function_name>"),
 ]
